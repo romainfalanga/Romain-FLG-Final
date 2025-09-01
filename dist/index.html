@@ -103,16 +103,9 @@
                         Bienvenue sur romainflg.fr
                     </h1>
                     <p class="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        Découvrez mes projets, soutenez-les et participez à leur développement en rejoignant mon canal Telegram.
+                        Découvrez mes projets et participez à leur développement en rejoignant mon canal Telegram.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="https://fr.tipeee.com/romain-falanga" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 hover-lift focus-ring min-w-[200px] inline-block text-center"
-                           aria-label="Me soutenir sur Tipeee (ouvre dans un nouvel onglet)">
-                            Faire un don
-                        </a>
+                    <div class="flex justify-center">
                         <a href="https://t.me/RomainFLGpublic" 
                            target="_blank" 
                            rel="noopener noreferrer"
@@ -268,7 +261,7 @@
         <section id="raccourci" class="py-20 bg-gradient-to-br from-indigo-50 to-blue-50" aria-labelledby="raccourci-title">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 id="raccourci-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
-                    Accédez au site en un clic
+                    Accédez à romainflg.fr en un clic
                 </h2>
                 <p id="shortcut-text" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
                     Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.
@@ -280,39 +273,15 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12" role="contentinfo">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <p class="text-gray-300">
-                        © <span id="current-year"></span> Romain FLG – Tous droits réservés.
-                    </p>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="#mentions" class="text-gray-300 hover:text-white transition-colors focus-ring" aria-label="Mentions légales">
-                        Mentions légales
-                    </a>
-                    <a href="https://t.me/RomainFLGpublic" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="text-gray-300 hover:text-white transition-colors focus-ring"
-                       aria-label="LinkedIn (ouvre dans un nouvel onglet)">
-                        Telegram
-                    </a>
-                    <a href="https://fr.tipeee.com/romain-falanga" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="text-gray-300 hover:text-white transition-colors focus-ring"
-                       aria-label="Tipeee (ouvre dans un nouvel onglet)">
-                        Tipeee
-                    </a>
-                </div>
+            <div class="text-center">
+                <p class="text-gray-300">
+                    © 2025 Romain FLG – Tous droits réservés
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Set current year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
         // Detect device type and update shortcut text
         function updateShortcutText() {
             const shortcutText = document.getElementById('shortcut-text');

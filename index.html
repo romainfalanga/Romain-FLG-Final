@@ -263,6 +263,18 @@
                 </div>
             </div>
         </section>
+
+        <!-- Shortcut Section -->
+        <section id="raccourci" class="py-20 bg-gradient-to-br from-indigo-50 to-blue-50" aria-labelledby="raccourci-title">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 id="raccourci-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
+                    Accédez au site en un clic
+                </h2>
+                <p id="shortcut-text" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.
+                </p>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -300,6 +312,21 @@
     <script>
         // Set current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Detect device type and update shortcut text
+        function updateShortcutText() {
+            const shortcutText = document.getElementById('shortcut-text');
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                shortcutText.textContent = "Ajoutez ce site à l'écran d'accueil de votre téléphone pour y accéder comme une application.";
+            } else {
+                shortcutText.textContent = "Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.";
+            }
+        }
+        
+        // Update text on page load
+        updateShortcutText();
         
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');

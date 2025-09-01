@@ -46,10 +46,6 @@
                             '0%': { opacity: '0' },
                             '100%': { opacity: '1' },
                         },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
                     },
                 }
             }
@@ -96,7 +92,7 @@
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
-        <section class="py-20 lg:py-28 animate-fadeIn">
+        <section class="py-12 lg:py-16 animate-fadeIn">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl mx-auto">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
@@ -119,7 +115,7 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projets" class="py-20 bg-white" aria-labelledby="projets-title">
+        <section id="projets" class="py-8 bg-white" aria-labelledby="projets-title">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 id="projets-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -128,7 +124,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project 1: ChessValue -->
-                    <article class="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-blue-200 relative">
+                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-blue-200 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center overflow-hidden">
@@ -151,7 +147,7 @@
                     </article>
 
                     <!-- Project 2: Chess100 -->
-                    <article class="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-green-200 relative">
+                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-green-200 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden">
@@ -174,7 +170,7 @@
                     </article>
 
                     <!-- Project 3: Chess64 -->
-                    <article class="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-purple-200 relative">
+                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-purple-200 relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center overflow-hidden">
@@ -200,7 +196,7 @@
         </section>
 
         <!-- Support Section -->
-        <section id="soutenir" class="py-20 bg-orange-50" aria-labelledby="soutenir-title">
+        <section id="soutenir" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-orange-50" aria-labelledby="soutenir-title">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 id="soutenir-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
                     Me soutenir
@@ -229,7 +225,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-blue-50" aria-labelledby="contact-title">
+        <section id="contact" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-blue-50" aria-labelledby="contact-title">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 id="contact-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
                     Telegram
@@ -258,7 +254,7 @@
         </section>
 
         <!-- Shortcut Section -->
-        <section id="raccourci" class="py-20 bg-gradient-to-br from-indigo-50 to-blue-50" aria-labelledby="raccourci-title">
+        <section id="raccourci" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-gradient-to-br from-indigo-50 to-blue-50" aria-labelledby="raccourci-title">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 id="raccourci-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
                     Accédez à romainflg.fr en un clic
@@ -271,17 +267,20 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12" role="contentinfo">
+    <footer class="bg-gray-900 text-white py-6" role="contentinfo">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <p class="text-gray-300">
-                    © 2025 Romain FLG – Tous droits réservés
+                    © <span id="current-year"></span> Romain FLG – Tous droits réservés.
                 </p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
         // Detect device type and update shortcut text
         function updateShortcutText() {
             const shortcutText = document.getElementById('shortcut-text');
@@ -350,12 +349,13 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-slideUp');
+                    entry.target.classList.remove('opacity-0', 'translate-y-5');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
                 }
             });
         }, observerOptions);
         
-        document.querySelectorAll('article, section').forEach(el => {
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
     </script>

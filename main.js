@@ -27,7 +27,7 @@
 -            mobileMenuButton?.setAttribute('aria-expanded', 'false');
 -        }
 -    });
-     
+-    
      // Smooth scroll with offset for fixed header
      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
          anchor.addEventListener('click', function (e) {

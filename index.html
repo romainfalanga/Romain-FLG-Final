@@ -24,9 +24,10 @@
     <meta name="twitter:description" content="Découvrez mes projets d'échecs innovants : ChessValue, Chess100, Chess64">
     <meta name="twitter:image" content="https://romainflg.fr/og-image.jpg">
     
-    <!-- Favicon -->
+    <!-- Favicon & Manifest -->
     <link rel="icon" type="image/png" href="/FLG.png">
     <link rel="apple-touch-icon" href="/FLG.png">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -292,6 +293,34 @@
                 <p id="shortcut-text" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
                     Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.
                 </p>
+                <button id="install-btn"
+                        class="inline-block bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold py-4 px-10 rounded-xl transition-all duration-300 hover-lift focus-ring text-lg shadow-lg hover:shadow-xl cursor-pointer">
+                    Ajouter le raccourci
+                </button>
+
+                <!-- Modal instructions iOS -->
+                <div id="ios-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                    <div class="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Ajouter à l'écran d'accueil</h3>
+                        <ol class="text-left text-gray-600 space-y-3 mb-6">
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+                                <span>Appuyez sur le bouton <strong>Partager</strong> <svg class="inline w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/></svg> en bas de Safari</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">2</span>
+                                <span>Faites défiler et appuyez sur <strong>Sur l'écran d'accueil</strong></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">3</span>
+                                <span>Appuyez sur <strong>Ajouter</strong></span>
+                            </li>
+                        </ol>
+                        <button id="ios-modal-close" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-xl transition-colors duration-200">
+                            Compris
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -387,6 +416,55 @@
         
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
+        });
+
+        // PWA Install logic
+        let deferredPrompt = null;
+        const installBtn = document.getElementById('install-btn');
+        const iosModal = document.getElementById('ios-modal');
+        const iosModalClose = document.getElementById('ios-modal-close');
+
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+
+        // Hide button if already installed
+        if (isInStandaloneMode) {
+            installBtn.style.display = 'none';
+        }
+
+        // Capture the beforeinstallprompt event (Chrome, Edge, Samsung Internet)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Chrome/Edge/Android: trigger native install prompt
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.textContent = 'Raccourci ajouté !';
+                    installBtn.disabled = true;
+                    installBtn.classList.add('opacity-60', 'cursor-default');
+                    installBtn.classList.remove('hover-lift', 'hover:from-indigo-700', 'hover:to-blue-700');
+                }
+                deferredPrompt = null;
+            } else if (isIos) {
+                // iOS: show instructions modal
+                iosModal.classList.remove('hidden');
+            } else {
+                // Fallback for other browsers: show alert with instructions
+                alert('Pour ajouter un raccourci :\n\n• Chrome/Edge : cliquez sur les trois points (⋮) puis "Installer" ou "Ajouter à l\'écran d\'accueil"\n• Firefox : cliquez sur les trois points puis "Installer"\n• Safari : utilisez le bouton Partager puis "Ajouter à l\'écran d\'accueil"');
+            }
+        });
+
+        // Close iOS modal
+        iosModalClose.addEventListener('click', () => {
+            iosModal.classList.add('hidden');
+        });
+        iosModal.addEventListener('click', (e) => {
+            if (e.target === iosModal) iosModal.classList.add('hidden');
         });
     </script>
 </body>

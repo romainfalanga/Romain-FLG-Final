@@ -333,25 +333,12 @@
                     Ajouter le raccourci
                 </button>
 
-                <!-- Modal instructions iOS -->
-                <div id="ios-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                <!-- Modal instructions manuelles -->
+                <div id="manual-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
                     <div class="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Ajouter à l'écran d'accueil</h3>
-                        <ol class="text-left text-gray-600 space-y-3 mb-6">
-                            <li class="flex items-start gap-3">
-                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">1</span>
-                                <span>Appuyez sur le bouton <strong>Partager</strong> <svg class="inline w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/></svg> en bas de Safari</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">2</span>
-                                <span>Faites défiler et appuyez sur <strong>Sur l'écran d'accueil</strong></span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">3</span>
-                                <span>Appuyez sur <strong>Ajouter</strong></span>
-                            </li>
-                        </ol>
-                        <button id="ios-modal-close" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-xl transition-colors duration-200">
+                        <div id="modal-instructions"></div>
+                        <button id="manual-modal-close" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-xl transition-colors duration-200 mt-6">
                             Compris
                         </button>
                     </div>
@@ -472,13 +459,21 @@
             titleObserver.observe(el);
         });
 
+        // Register service worker for PWA install
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+
         // PWA Install logic
         let deferredPrompt = null;
         const installBtn = document.getElementById('install-btn');
-        const iosModal = document.getElementById('ios-modal');
-        const iosModalClose = document.getElementById('ios-modal-close');
+        const manualModal = document.getElementById('manual-modal');
+        const modalInstructions = document.getElementById('modal-instructions');
+        const manualModalClose = document.getElementById('manual-modal-close');
 
         const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isSamsung = /SamsungBrowser/i.test(navigator.userAgent);
+        const isAndroid = /Android/i.test(navigator.userAgent);
         const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 
         // Hide button if already installed
@@ -492,9 +487,18 @@
             deferredPrompt = e;
         });
 
+        function showManualModal(steps) {
+            modalInstructions.innerHTML = '<ol class="text-left text-gray-600 space-y-3">' +
+                steps.map((step, i) =>
+                    '<li class="flex items-start gap-3">' +
+                    '<span class="flex-shrink-0 w-7 h-7 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-bold text-sm">' + (i + 1) + '</span>' +
+                    '<span>' + step + '</span></li>'
+                ).join('') + '</ol>';
+            manualModal.classList.remove('hidden');
+        }
+
         installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
-                // Chrome/Edge/Android: trigger native install prompt
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 if (outcome === 'accepted') {
@@ -505,20 +509,38 @@
                 }
                 deferredPrompt = null;
             } else if (isIos) {
-                // iOS: show instructions modal
-                iosModal.classList.remove('hidden');
+                showManualModal([
+                    'Appuyez sur le bouton <strong>Partager</strong> en bas de Safari',
+                    'Faites défiler et appuyez sur <strong>Sur l\'écran d\'accueil</strong>',
+                    'Appuyez sur <strong>Ajouter</strong>'
+                ]);
+            } else if (isSamsung) {
+                showManualModal([
+                    'Appuyez sur le <strong>menu</strong> (les 3 barres ☰) en bas à droite',
+                    'Appuyez sur <strong>Ajouter la page à</strong>',
+                    'Choisissez <strong>Écran d\'accueil</strong>'
+                ]);
+            } else if (isAndroid) {
+                showManualModal([
+                    'Appuyez sur le <strong>menu</strong> (les 3 points ⋮) en haut à droite',
+                    'Appuyez sur <strong>Installer l\'application</strong> ou <strong>Ajouter à l\'écran d\'accueil</strong>',
+                    'Confirmez en appuyant sur <strong>Installer</strong>'
+                ]);
             } else {
-                // Fallback for other browsers: show alert with instructions
-                alert('Pour ajouter un raccourci :\n\n• Chrome/Edge : cliquez sur les trois points (⋮) puis "Installer" ou "Ajouter à l\'écran d\'accueil"\n• Firefox : cliquez sur les trois points puis "Installer"\n• Safari : utilisez le bouton Partager puis "Ajouter à l\'écran d\'accueil"');
+                showManualModal([
+                    'Cliquez sur le <strong>menu</strong> (⋮ ou ☰) de votre navigateur',
+                    'Cliquez sur <strong>Installer</strong> ou <strong>Ajouter à l\'écran d\'accueil</strong>',
+                    'Confirmez l\'installation'
+                ]);
             }
         });
 
-        // Close iOS modal
-        iosModalClose.addEventListener('click', () => {
-            iosModal.classList.add('hidden');
+        // Close modal
+        manualModalClose.addEventListener('click', () => {
+            manualModal.classList.add('hidden');
         });
-        iosModal.addEventListener('click', (e) => {
-            if (e.target === iosModal) iosModal.classList.add('hidden');
+        manualModal.addEventListener('click', (e) => {
+            if (e.target === manualModal) manualModal.classList.add('hidden');
         });
     </script>
 </body>

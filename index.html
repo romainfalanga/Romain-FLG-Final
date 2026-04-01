@@ -27,7 +27,6 @@
     <!-- Favicon & Manifest -->
     <link rel="icon" type="image/png" href="/FLG.png">
     <link rel="apple-touch-icon" href="/FLG.png">
-    <link rel="manifest" href="/manifest.json">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -121,7 +120,7 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl mx-auto">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-                        <span id="hero-title" class="typewriter-cursor"></span>
+                        <span id="hero-title"></span>
                     </h1>
                     <p class="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed" style="min-height: 2em;">
                         <span id="hero-subtitle"></span>
@@ -347,8 +346,7 @@
             setTimeout(() => {
                 typeWriter(heroTitle, 'Bienvenue sur Romain FLG', 60, () => {
                     setTimeout(() => {
-                        heroSubtitle.classList.add('typewriter-cursor');
-                        typeWriter(heroSubtitle, 'Découvrez mes projets et réalisations pour mes clients', 40);
+                        typeWriter(heroSubtitle, 'Découvrez mes projets et réalisations pour mes clients', 25);
                     }, 300);
                 });
             }, 400);

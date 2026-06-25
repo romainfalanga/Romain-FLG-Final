@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f3ce"/>
+      <stop offset="100%" style="stop-color:#e8d44d"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <filter id="moonGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" rx="40" fill="url(#bg)"/>
+  
+  <!-- Stars -->
+  <circle cx="50" cy="60" r="2" fill="#fff" opacity="0.8" filter="url(#starGlow)"/>
+  <circle cx="120" cy="40" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="320" cy="70" r="2.5" fill="#fff" opacity="0.9" filter="url(#starGlow)"/>
+  <circle cx="350" cy="120" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="80" cy="130" r="1" fill="#fff" opacity="0.7"/>
+  <circle cx="280" cy="50" r="1.8" fill="#fff" opacity="0.6"/>
+  <circle cx="370" cy="180" r="1.2" fill="#fff" opacity="0.4"/>
+  <circle cx="40" cy="200" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="160" cy="80" r="1" fill="#fff" opacity="0.7" filter="url(#starGlow)"/>
+  <circle cx="240" cy="30" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="60" cy="300" r="1.5" fill="#fff" opacity="0.4"/>
+  <circle cx="340" cy="280" r="1" fill="#fff" opacity="0.5"/>
+  
+  <!-- Crescent Moon -->
+  <g filter="url(#moonGlow)">
+    <circle cx="200" cy="140" r="55" fill="url(#moon)"/>
+    <circle cx="225" cy="120" r="45" fill="url(#bg)"/>
+  </g>
+  
+  <!-- Sleeping eye / closed eye symbol -->
+  <g transform="translate(200, 230)" fill="none" stroke="url(#glow)" stroke-width="3" stroke-linecap="round">
+    <!-- Closed eye -->
+    <path d="M-50,0 Q-25,-20 0,-25 Q25,-20 50,0" />
+    <path d="M-50,0 Q-25,20 0,25 Q25,20 50,0" opacity="0.3"/>
+    <!-- Eyelashes / dream waves -->
+    <path d="M-35,8 L-38,18" stroke-width="2" opacity="0.6"/>
+    <path d="M-15,14 L-16,25" stroke-width="2" opacity="0.6"/>
+    <path d="M10,14 L11,25" stroke-width="2" opacity="0.6"/>
+    <path d="M32,8 L35,18" stroke-width="2" opacity="0.6"/>
+    <!-- Z's for sleep -->
+    <g transform="translate(60, -30)" fill="#a855f7" stroke="none" opacity="0.7">
+      <text font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#a855f7">z</text>
+    </g>
+    <g transform="translate(80, -55)" fill="#7c3aed" stroke="none" opacity="0.5">
+      <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" fill="#7c3aed">z</text>
+    </g>
+    <g transform="translate(95, -75)" fill="#6d28d9" stroke="none" opacity="0.3">
+      <text font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#6d28d9">z</text>
+    </g>
+  </g>
+  
+  <!-- Text: Reve Mieux -->
+  <text x="200" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="36" fill="#e2e8f0" letter-spacing="2">
+    REVE MIEUX
+  </text>
+  <text x="200" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-weight="300" font-size="14" fill="#94a3b8" letter-spacing="4">
+    REVES LUCIDES
+  </text>
+</svg>

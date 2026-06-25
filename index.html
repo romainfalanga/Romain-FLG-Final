@@ -116,15 +116,13 @@
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
-        <section class="py-16 lg:py-24">
+        <section class="py-12 lg:py-16">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl mx-auto">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
                         <span id="hero-title"></span>
                     </h1>
-                    <p class="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed" style="min-height: 2em;">
-                        <span id="hero-subtitle"></span>
-                    </p>
+
                 </div>
             </div>
         </section>
@@ -134,7 +132,7 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 id="projets-title" class="section-title-animate text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Mes Projets
+                        Mes réalisations
                     </h2>
                     <div class="section-title-animate w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
@@ -149,7 +147,7 @@
                         <div class="p-8">
                             <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-violet-700 transition-colors duration-300">Rêve Mieux</h3>
                             <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                                Application web conçue pour déclencher des rêves lucides. Journal onirique détaillé avec émotions, étapes, tags catégorisés (personnes, lieux, symboles) et filtres avancés pour explorer ses rêves. Système de séries pour relier les rêves qui se suivent et se revisualiser des univers oniriques entiers avant le coucher, maximisant les chances d’y retourner. Ancrage musical, contrôles de réalité, TLR nocturne, protocoles WBTB, MILD et SSILD, et intentions de rêves — le tout basé sur les recherches de Stanford et Northwestern.
+                                Application web conçue pour déclencher des rêves lucides. Journal onirique détaillé avec émotions, étapes, tags catégorisés (personnes, lieux, symboles) et filtres avancés pour explorer ses rêves. Système de séries pour relier les rêves qui se suivent et se revisualiser des univers oniriques entiers avant le coucher, maximisant les chances d’y retourner. Ancrage musical, contrôles de réalité, TLR nocturne, protocoles WBTB, MILD et SSILD, et intentions de rêves.
                             </p>
                             <a href="https://revemieux.app/"
                                target="_blank"
@@ -364,14 +362,9 @@
         // Launch typewriter on page load
         window.addEventListener('DOMContentLoaded', () => {
             const heroTitle = document.getElementById('hero-title');
-            const heroSubtitle = document.getElementById('hero-subtitle');
 
             setTimeout(() => {
-                typeWriter(heroTitle, 'Bienvenue sur Romain FLG', 60, () => {
-                    setTimeout(() => {
-                        typeWriter(heroSubtitle, 'Découvrez mes projets et réalisations pour mes clients', 25);
-                    }, 300);
-                });
+                typeWriter(heroTitle, 'Bienvenue sur Romain FLG', 60);
             }, 400);
         });
 

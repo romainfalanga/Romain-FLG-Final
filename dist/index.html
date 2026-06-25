@@ -24,7 +24,7 @@
     <meta name="twitter:description" content="Découvrez mes projets d'échecs innovants : ChessValue, Chess100, Chess64">
     <meta name="twitter:image" content="https://romainflg.fr/og-image.jpg">
     
-    <!-- Favicon -->
+    <!-- Favicon & Manifest -->
     <link rel="icon" type="image/png" href="/FLG.png">
     <link rel="apple-touch-icon" href="/FLG.png">
     
@@ -63,6 +63,39 @@
         .hover-lift:hover { transform: translateY(-2px); }
         .focus-ring { transition: all 0.2s ease; }
         .focus-ring:focus { outline: 2px solid #3b82f6; outline-offset: 2px; }
+
+        /* Typewriter cursor */
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            font-weight: 100;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Staggered card animations */
+        .card-stagger { transition-property: opacity, transform; transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* Section title slide-in */
+        .section-title-animate { opacity: 0; transform: translateY(20px) scale(0.95); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .section-title-animate.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+        /* Subtle decorative gradient */
+        .section-decoration { position: relative; overflow: hidden; }
+        .section-decoration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -72,17 +105,8 @@
         <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Navigation principale">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="#" class="text-xl font-bold text-blue-600 hover:text-blue-700 focus-ring transition-colors" aria-label="Accueil - romainflg.fr">
-                        romainflg.fr
-                    </a>
-                </div>
-                <div>
-                    <a href="https://fr.tipeee.com/romain-falanga" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 hover-lift focus-ring"
-                       aria-label="Faire un don sur Tipeee (ouvre dans un nouvel onglet)">
-                        Faire un don
+                    <a href="#" class="text-xl font-bold text-blue-600 hover:text-blue-700 focus-ring transition-colors" aria-label="Accueil - Romain FLG">
+                        Romain FLG
                     </a>
                 </div>
             </div>
@@ -92,39 +116,78 @@
     <!-- Main Content -->
     <main class="pt-16">
         <!-- Hero Section -->
-        <section class="py-12 lg:py-16 animate-fadeIn">
+        <section class="py-16 lg:py-24">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl mx-auto">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-                        Bienvenue sur romainflg.fr
+                        <span id="hero-title"></span>
                     </h1>
-                    <p class="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        Découvrez mes projets et participez à leur développement en rejoignant mon canal Telegram.
+                    <p class="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed" style="min-height: 2em;">
+                        <span id="hero-subtitle"></span>
                     </p>
-                    <div class="flex justify-center">
-                        <a href="https://t.me/RomainFLGpublic" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 hover-lift focus-ring min-w-[200px] inline-block text-center"
-                           aria-label="Mon LinkedIn (ouvre dans un nouvel onglet)">
-                            Mon Telegram
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projets" class="py-8 bg-white" aria-labelledby="projets-title">
+        <!-- Mes Projets Section -->
+        <section id="projets" class="py-16 bg-gradient-to-b from-white via-white to-gray-50 section-decoration" aria-labelledby="projets-title">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 id="projets-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    <h2 id="projets-title" class="section-title-animate text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                         Mes Projets
+                    </h2>
+                    <div class="section-title-animate w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 1: ChessValue -->
-                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-blue-200 relative">
+
+                <!-- Rêve Mieux (mis en avant) -->
+                <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-violet-200 relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-violet-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-br from-[#1a1a2e] to-[#0f3460] flex items-center justify-center p-4 min-h-[200px]">
+                            <img src="/revemieux.svg" alt="Logo Rêve Mieux" class="max-w-[60%] max-h-[60%] sm:max-w-[25%] sm:max-h-[25%] object-contain group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-violet-700 transition-colors duration-300">Rêve Mieux</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                                Application web pour optimiser les chances de faire des rêves lucides. Contrôles de réalité, ancrage musical avec le refrain « Rêve Mieux », TLR nocturne (alarmes pendant le sommeil paradoxal), techniques d’induction WBTB, MILD et SSILD, incubation de rêves et journal onirique. Un système complet basé sur les dernières recherches en neurosciences du sommeil.
+                            </p>
+                            <a href="https://revemieux.app/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-block bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
+                               aria-label="Ouvrir Rêve Mieux (ouvre dans un nouvel onglet)">
+                                Ouvrir Rêve Mieux
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Décode ton esprit (mis en avant) -->
+                <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-rose-200 relative mt-8">
+                    <div class="absolute inset-0 bg-gradient-to-br from-rose-50 to-fuchsia-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="bg-white flex items-center justify-center p-4 min-h-[200px]">
+                            <img src="/decodetonesprit.png" alt="Logo Décode ton esprit" class="max-w-[60%] max-h-[60%] sm:max-w-[25%] sm:max-h-[25%] object-contain group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-rose-700 transition-colors duration-300">Décode ton esprit</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                                Un blog autonome propulsé par l’intelligence artificielle qui s’actualise chaque jour sans intervention humaine. À travers les histoires de 20 personnages, il explore biais cognitifs, émotions et schémas répétitifs, en mettant en lumière leurs aspects négatifs tout en proposant des solutions concrètes pour mieux les comprendre et les dépasser.
+                            </p>
+                            <a href="https://decodetonesprit.fr/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-block bg-gradient-to-r from-rose-600 to-fuchsia-600 hover:from-rose-700 hover:to-fuchsia-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
+                               aria-label="Ouvrir Décode ton esprit (ouvre dans un nouvel onglet)">
+                                Ouvrir Décode ton esprit
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                    <!-- ChessValue -->
+                    <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-blue-200 relative" style="transition-delay: 0ms;">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center overflow-hidden">
@@ -135,8 +198,8 @@
                                 <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                                     Cet outil pédagogique pour les échecs calcule de manière dynamique la valeur des pièces en fonction de leur position sur l’échiquier. Un cavalier mal placé peut ainsi valoir moins qu’un pion, ce qui aide à mieux comprendre l’importance du placement et à progresser dans sa stratégie.
                                 </p>
-                                <a href="https://chessvalue.netlify.app/" 
-                                   target="_blank" 
+                                <a href="https://chessvalue.netlify.app/"
+                                   target="_blank"
                                    rel="noopener noreferrer"
                                    class="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
                                    aria-label="Ouvrir Chess Value (ouvre dans un nouvel onglet)">
@@ -146,8 +209,8 @@
                         </div>
                     </article>
 
-                    <!-- Project 2: Chess100 -->
-                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-green-200 relative">
+                    <!-- Chess Variant 100 -->
+                    <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-green-200 relative" style="transition-delay: 150ms;">
                         <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden">
@@ -158,8 +221,8 @@
                                 <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                                     Dans ce jeu, l’échiquier s’étend sur 100 rangées et 8 colonnes. Les joueurs peuvent créer leur propre parcours en plaçant des fous, cavaliers, tours et pions, puis défier leurs adversaires à atteindre la centième rangée sans se faire capturer et en un minimum de coups.
                                 </p>
-                                <a href="https://chessvariant100.netlify.app/" 
-                                   target="_blank" 
+                                <a href="https://chessvariant100.netlify.app/"
+                                   target="_blank"
                                    rel="noopener noreferrer"
                                    class="inline-block bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
                                    aria-label="Ouvrir Chess Variant 100 (ouvre dans un nouvel onglet)">
@@ -169,8 +232,8 @@
                         </div>
                     </article>
 
-                    <!-- Project 3: Chess64 -->
-                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-purple-200 relative">
+                    <!-- Chess Variant Draft -->
+                    <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-purple-200 relative" style="transition-delay: 300ms;">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="aspect-video bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center overflow-hidden">
@@ -181,8 +244,8 @@
                                 <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                                     Chaque joueur place ses pièces tour à tour sur sa première rangée avant que la partie ne commence. La stratégie démarre dès le placement et se prolonge avec une règle inédite : supprimer des cases de l’échiquier pour piéger son adversaire.
                                 </p>
-                                <a href="https://chessvariantdraft.netlify.app/" 
-                                   target="_blank" 
+                                <a href="https://chessvariantdraft.netlify.app/"
+                                   target="_blank"
                                    rel="noopener noreferrer"
                                    class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
                                    aria-label="Ouvrir Chess Variant Draft (ouvre dans un nouvel onglet)">
@@ -192,107 +255,79 @@
                         </div>
                     </article>
                 </div>
-                    <!-- Project 4: Mon Journal Scolaire -->
-                    <article class="animate-on-scroll opacity-0 translate-y-5 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-100 hover:border-amber-200 relative">
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative z-10">
-                            <div class="bg-white flex items-center justify-center p-4 min-h-[200px]">
-                                <img src="/monjournalscoliare.jpg" alt="Logo Mon Journal Scolaire" class="max-w-[60%] max-h-[60%] sm:max-w-[25%] sm:max-h-[25%] object-contain group-hover:scale-105 transition-transform duration-500">
-                            </div>
-                            <div class="p-8">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-amber-700 transition-colors duration-300">Mon Journal Scolaire</h3>
-                                <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                                    Mon Journal Scolaire est conçu pour accompagner collégiens et lycéens dans une réflexion hebdomadaire qui les aide à transformer leur expérience scolaire. Grâce à des questions simples mais puissantes, ce journal les pousse à comprendre l'utilité de ce qu'ils apprennent, à explorer leurs passions, et à apprécier les moments positifs de leur semaine pour voir l'école autrement.
-                                </p>
-                                <div class="space-y-3">
-                                    <a href="https://www.amazon.fr/Mon-journal-scolaire-Trouver-l%C3%A9cole/dp/B0DSF5WGVC/ref=sr_1_1?sr=8-1" 
-                                       target="_blank" 
-                                       rel="noopener noreferrer"
-                                       class="inline-block bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
-                                       aria-label="Acheter sur Amazon (ouvre dans un nouvel onglet)">
-                                        Acheter sur Amazon
-                                    </a>
-                                    <a href="https://monjournalscolaire.fr/" 
-                                       target="_blank" 
-                                       rel="noopener noreferrer"
-                                       class="inline-block bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
-                                       aria-label="Contact établissements (ouvre dans un nouvel onglet)">
-                                        Contact établissements
-                                    </a>
-                                </div>
-                            </div>
+
+                <!-- Mon Journal Scolaire -->
+                <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-amber-200 relative mt-8">
+                    <div class="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="bg-white flex items-center justify-center p-4 min-h-[200px]">
+                            <img src="/monjournalscoliare.jpg" alt="Logo Mon Journal Scolaire" class="max-w-[60%] max-h-[60%] sm:max-w-[25%] sm:max-h-[25%] object-contain group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-amber-700 transition-colors duration-300">Mon Journal Scolaire</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                                Mon Journal Scolaire est conçu pour accompagner collégiens et lycéens dans une réflexion hebdomadaire qui les aide à transformer leur expérience scolaire. Grâce à des questions simples mais puissantes, ce journal les pousse à comprendre l’utilité de ce qu’ils apprennent, à explorer leurs passions, et à apprécier les moments positifs de leur semaine pour voir l’école autrement.
+                            </p>
+                            <a href="https://www.amazon.fr/Mon-journal-scolaire-Trouver-l%C3%A9cole/dp/B0DSF5WGVC/ref=sr_1_1?sr=8-1"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-block bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
+                               aria-label="Acheter sur Amazon (ouvre dans un nouvel onglet)">
+                                Acheter sur Amazon
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Réalisations pour mes clients -->
+        <section id="clients" class="py-16 bg-gradient-to-b from-gray-50 via-gray-50 to-white section-decoration" aria-labelledby="clients-title">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="clients-title" class="section-title-animate text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                        Réalisations pour mes clients
+                    </h2>
+                    <div class="section-title-animate w-20 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Pressing la Porte d’Azur -->
+                    <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-teal-200 relative" style="transition-delay: 0ms;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-teal-50 to-cyan-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10 p-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-teal-700 transition-colors duration-300">Pressing la Porte d’Azur</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                                Site vitrine pour un pressing situé à Bandol, spécialisé dans l’aqua nettoyage écologique, le repassage expert et les retouches couture. Plus de 25 ans d’expérience au service de l’entretien textile avec une technologie 100% écologique et sans solvant chimique.
+                            </p>
+                            <a href="https://pressing-porte-azur.fr/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-block bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
+                               aria-label="Voir le site Pressing la Porte d’Azur (ouvre dans un nouvel onglet)">
+                                Voir le site
+                            </a>
                         </div>
                     </article>
-            </div>
-        </section>
 
-        <!-- Support Section -->
-        <section id="soutenir" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-orange-50" aria-labelledby="soutenir-title">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 id="soutenir-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
-                    Me soutenir
-                </h2>
-                <div class="mb-8">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </div>
+                    <!-- Lorclean -->
+                    <article class="animate-on-scroll opacity-0 translate-y-5 card-stagger duration-700 group bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover-lift border border-gray-100 hover:border-sky-200 relative" style="transition-delay: 150ms;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-sky-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10 p-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-sky-700 transition-colors duration-300">Lorclean</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                                Site vitrine pour une entreprise de ménage et d’entretien haut de gamme à domicile. Lorclean propose des prestations de ménage régulier, de nettoyage spécialisé textile (tapis, canapés, matelas) et de ménage de fin de bail, avec des tarifs transparents.
+                            </p>
+                            <a href="https://lorclean.netlify.app/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-block bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover-lift focus-ring w-full text-center shadow-lg hover:shadow-xl"
+                               aria-label="Voir le site Lorclean (ouvre dans un nouvel onglet)">
+                                Voir le site
+                            </a>
+                        </div>
+                    </article>
                 </div>
-                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Vos dons m'aident à développer mes projets. Chaque contribution, même petite, fait la différence.
-                </p>
-                <div class="relative inline-block">
-                    <div class="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                    <a href="https://fr.tipeee.com/romain-falanga" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="relative inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 hover-lift focus-ring text-lg shadow-xl hover:shadow-2xl"
-                       aria-label="Soutenir sur Tipeee (ouvre dans un nouvel onglet)">
-                        Faire un don
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-blue-50" aria-labelledby="contact-title">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 id="contact-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
-                    Telegram
-                </h2>
-                <div class="mb-8">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Envie de participer à l’aventure ? Rejoignez mon canal Telegram pour mettre vos compétences au service des projets qui vous inspirent
-                </p>
-                <div class="relative inline-block">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                    <a href="https://t.me/RomainFLGpublic" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="relative inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 hover-lift focus-ring text-lg shadow-xl hover:shadow-2xl"
-                       aria-label="Échanger sur LinkedIn (ouvre dans un nouvel onglet)">
-                        Mon canal Telegram
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Shortcut Section -->
-        <section id="raccourci" class="animate-on-scroll opacity-0 translate-y-5 transition-all duration-500 ease-out py-20 bg-gradient-to-br from-indigo-50 to-blue-50" aria-labelledby="raccourci-title">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 id="raccourci-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
-                    Accédez à romainflg.fr en un clic
-                </h2>
-                <p id="shortcut-text" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.
-                </p>
             </div>
         </section>
     </main>
@@ -309,50 +344,41 @@
     </footer>
 
     <script>
+        // Typewriter effect
+        function typeWriter(element, text, speed, callback) {
+            let i = 0;
+            element.classList.add('typewriter-cursor');
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('typewriter-cursor');
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        // Launch typewriter on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+
+            setTimeout(() => {
+                typeWriter(heroTitle, 'Bienvenue sur Romain FLG', 60, () => {
+                    setTimeout(() => {
+                        typeWriter(heroSubtitle, 'Découvrez mes projets et réalisations pour mes clients', 25);
+                    }, 300);
+                });
+            }, 400);
+        });
+
         // Set current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Detect device type and update shortcut text
-        function updateShortcutText() {
-            const shortcutText = document.getElementById('shortcut-text');
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                shortcutText.textContent = "Ajoutez ce site à l'écran d'accueil de votre téléphone pour y accéder comme une application.";
-            } else {
-                shortcutText.textContent = "Ajoutez un raccourci de ce site sur votre bureau ou écran d'accueil pour y revenir facilement.";
-            }
-        }
-        
-        // Update text on page load
-        updateShortcutText();
-        
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton?.addEventListener('click', () => {
-            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-            mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
-            mobileMenu?.classList.toggle('hidden');
-        });
-        
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu?.classList.add('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-            });
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuButton?.contains(e.target) && !mobileMenu?.contains(e.target)) {
-                mobileMenu?.classList.add('hidden');
-                mobileMenuButton?.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
+
+
         // Smooth scroll with offset for fixed header
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -362,7 +388,7 @@
                     const headerOffset = 80;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
+
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
@@ -370,13 +396,13 @@
                 }
             });
         });
-        
-        // Add animation on scroll
+
+        // Add animation on scroll (cards + section titles)
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -385,10 +411,24 @@
                 }
             });
         }, observerOptions);
-        
+
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
+
+        // Section title observer
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.section-title-animate').forEach(el => {
+            titleObserver.observe(el);
+        });
+
     </script>
 </body>
 </html>
